@@ -9,21 +9,23 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] Transform target;
     [SerializeField] float chaseRange = 5f;
     [SerializeField] float turnSpeed = 5f;
-    [SerializeField] float crawlSpeed = 4f;
+    [SerializeField] float walkSpeed = 2f;
+    [SerializeField] float runSpeed = 4f;
+    [SerializeField] float waitLenght = 4f;
+    [SerializeField] bool isWaiting = false;
+
 
     NavMeshAgent navMeshAgent;
     Animator animator;
     EnemyHealth enemyHealth;
     float distanceToTarget = Mathf.Infinity;
     bool isProvoked = false;
-    float walkingSpeed;
 
     void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         enemyHealth = GetComponent<EnemyHealth>();
-        walkingSpeed = navMeshAgent.speed;
     }
 
     void Update()
@@ -34,16 +36,23 @@ public class EnemyAI : MonoBehaviour
             navMeshAgent.enabled = false;
             return;
         }
+        if(animator.GetBool("isWalking"))
+        {
+            navMeshAgent.speed = walkSpeed;
+        }
+        else
+        {
+            navMeshAgent.speed = runSpeed;
+        }
         distanceToTarget = Vector3.Distance(target.position, transform.position);
         if (isProvoked)
-        {
+        { 
             EngageTarget();
         }
         else if (distanceToTarget <= chaseRange)
         {
             isProvoked = true;
         }
-        Debug.Log(animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie Running Crawl"));
     }
 
     public void OnDamageTaken()
@@ -53,9 +62,13 @@ public class EnemyAI : MonoBehaviour
 
     void EngageTarget()
     {
-        FaceTarget();
+        if(!isWaiting)
+        {
+            FaceTarget();
+        }
         if (distanceToTarget >= navMeshAgent.stoppingDistance)
         {
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime % 1f > 0.01f) { return; }
             animator.SetBool("attack", false);
             ChaseTarget();
         }
@@ -69,7 +82,20 @@ public class EnemyAI : MonoBehaviour
     void ChaseTarget()
     {
         animator.SetTrigger("move");
-        navMeshAgent.SetDestination(target.position);
+        if(isWaiting)
+        {
+            StartCoroutine(WaitForAttack());
+        }
+        else
+        {
+            navMeshAgent.SetDestination(target.position);
+        }
+    }
+
+    IEnumerator WaitForAttack() 
+    {
+        yield return new WaitForSeconds(waitLenght);
+        isWaiting = false;
     }
 
     void AttackTarget()
@@ -88,15 +114,5 @@ public class EnemyAI : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, chaseRange);
-    }
-
-    public void BeginCrawlEvent()
-    {
-        animator.GetCurrentAnimatorStateInfo(0).IsName("Crawl");
-    }
-
-    public void BeginPunchingEvent()
-    {
-        navMeshAgent.speed = walkingSpeed;
     }
 }
