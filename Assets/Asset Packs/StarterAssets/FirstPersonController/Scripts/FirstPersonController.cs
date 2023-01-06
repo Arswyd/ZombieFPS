@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -51,6 +52,17 @@ namespace StarterAssets
 		[Tooltip("How far in degrees can you move the camera down")]
 		public float BottomClamp = -90.0f;
 
+		[Space(10)]
+		[Header("Headbob parameters")]
+		[SerializeField] float walkBobSpeed = 14f;
+		[SerializeField] float walkBobAmount = 0.05f;
+		[SerializeField] float sprintBobSpeed = 18f;
+		[SerializeField] float sprintBobAmount = 0.1f;
+
+		//GameObject playerFollowCamera;
+		float cameraDefaultYPos = 0;
+    	float headBobTimer;
+
 		// cinemachine
 		private float _cinemachineTargetPitch;
 
@@ -93,6 +105,9 @@ namespace StarterAssets
 			{
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 			}
+
+			//playerFollowCamera = GameObject.FindGameObjectWithTag("PlayerCamera");
+			cameraDefaultYPos = CinemachineCameraTarget.transform.localPosition.y;
 		}
 
 		private void Start()
@@ -115,6 +130,7 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			HandleHeadBob();
 		}
 
 		private void LateUpdate()
@@ -264,5 +280,19 @@ namespace StarterAssets
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}
+
+		void HandleHeadBob()
+    	{
+			if (!Grounded) { return; }
+
+			if (MathF.Abs(_speed) > 0.1f)
+			{
+				headBobTimer += Time.deltaTime * (_input.sprint ? sprintBobSpeed : walkBobSpeed);
+				CinemachineCameraTarget.transform.localPosition = new Vector3(
+					CinemachineCameraTarget.transform.localPosition.x,
+					cameraDefaultYPos + MathF.Sin(headBobTimer) * (_input.sprint ? sprintBobAmount : walkBobAmount),
+					CinemachineCameraTarget.transform.localPosition.z);
+			}
+    	}
 	}
 }

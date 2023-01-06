@@ -47,25 +47,28 @@ public class IKFootPlacement : MonoBehaviour
         if(!enableFeetIK) {return;}
         if(animator == null) {return;}
 
+        currentLeftFootIkRotation = animator.GetIKRotation(AvatarIKGoal.LeftFoot);
+        currentRightFootIkRotation = animator.GetIKRotation(AvatarIKGoal.RightFoot);
+
         MovePelvisHeight();
 
         //right foot ik position and rotation
         animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1f);
         animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, animator.GetFloat(rightFootAnimVariableName));
 
-        MoveFeetToIKPoint(AvatarIKGoal.RightFoot, rightFootIKPosition, rightFootIKRotation, ref lastRightFootPositionY);
+        MoveFeetToIKPoint(AvatarIKGoal.RightFoot, rightFootIKPosition, rightFootIKRotation, ref lastRightFootPositionY, currentRightFootIkRotation);
 
         //left foot ik position and rotation
         animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1f);
         animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, animator.GetFloat(leftFootAnimVariableName));
 
-        MoveFeetToIKPoint(AvatarIKGoal.LeftFoot, leftFootIKPosition, leftFootIKRotation, ref lastLeftFootPositionY);
+        MoveFeetToIKPoint(AvatarIKGoal.LeftFoot, leftFootIKPosition, leftFootIKRotation, ref lastLeftFootPositionY, currentLeftFootIkRotation);
     }
 
-    void MoveFeetToIKPoint(AvatarIKGoal foot, Vector3 positionIKHolder, Quaternion rotationIKHolder, ref float lastFootPositionY)
+    void MoveFeetToIKPoint(AvatarIKGoal foot, Vector3 positionIKHolder, Quaternion rotationIKHolder, ref float lastFootPositionY, Quaternion currRot)
     {
         Vector3 targetIKPosition = animator.GetIKPosition(foot);
-        Quaternion targetIKRotation = rotationIKHolder * animator.GetIKRotation(foot);
+        Quaternion targetIKRotation = rotationIKHolder * currRot; //animator.GetIKRotation(foot);
 
         if(positionIKHolder != Vector3.zero)
         {
@@ -119,7 +122,11 @@ public class IKFootPlacement : MonoBehaviour
             Debug.DrawLine(fromSkyPosition, hit.point, Color.magenta);
             feetIKPositions = fromSkyPosition;
             feetIKPositions.y = hit.point.y + pelvisOffset;
-            feetIKRotations = Quaternion.FromToRotation(Vector3.up, hit.normal) * transform.rotation;
+            //feetIKRotations = Quaternion.FromToRotation(Vector3.up, hit.normal) * transform.rotation;
+            
+            float rotationStiffnessSlerpValue = Time.deltaTime * 8f;
+            Quaternion feetHitRot = Quaternion.FromToRotation(Vector3.up, hit.normal);
+            feetIKRotations = Quaternion.Slerp(feetIKRotations, feetHitRot, rotationStiffnessSlerpValue);
 
             return;
         }

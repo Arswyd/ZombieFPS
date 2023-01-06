@@ -13,6 +13,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] float timeBetweenShots = 0.5f;
     [SerializeField] ParticleSystem muzzleFlash;
     [SerializeField] GameObject hitEffect;
+    [SerializeField] GameObject enemyHitEffect;
     [SerializeField] Ammo ammoSlot;
     [SerializeField] AmmoType ammoType;
 
@@ -75,7 +76,7 @@ public class Weapon : MonoBehaviour
 
     void CreateHitImpact(RaycastHit hit)
     {
-        GameObject instance = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
+        GameObject instance = Instantiate(hit.collider.transform.tag == "Enemy" ? enemyHitEffect : hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
         Destroy(instance, 1);
     }
 

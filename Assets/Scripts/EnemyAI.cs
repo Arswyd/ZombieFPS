@@ -14,6 +14,8 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] float waitLenght = 4f;
     [SerializeField] bool isWaiting = false;
 
+    [SerializeField] float maxAnimationCycleOffset = 0.5f;
+
 
     NavMeshAgent navMeshAgent;
     Animator animator;
@@ -25,6 +27,7 @@ public class EnemyAI : MonoBehaviour
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        animator.SetFloat("CycleOffset", UnityEngine.Random.Range(0, maxAnimationCycleOffset));
         enemyHealth = GetComponent<EnemyHealth>();
     }
 
@@ -114,5 +117,10 @@ public class EnemyAI : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, chaseRange);
+    }
+
+    public bool GetIsProvoked()
+    {
+        return isProvoked;
     }
 }
