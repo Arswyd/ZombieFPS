@@ -17,6 +17,7 @@ namespace StarterAssets
 		public bool switchPistol;
 		public bool switchShotgun;
 		public bool switchSniper;
+		public bool flashlight;
 		public float scroll;
 
 		[Header("Movement Settings")]
@@ -75,6 +76,11 @@ namespace StarterAssets
 			SwitchSniperInput(value.isPressed);
 		}
 
+		public void OnFlashlight(InputValue value)
+		{
+			FlashlightInput(value.isPressed);
+		}
+
 		public void OnScroll(InputValue value)
 		{
 			ScrollInput(value.Get<float>());
@@ -125,6 +131,11 @@ namespace StarterAssets
 		public void SwitchSniperInput(bool newSwitchSniperState)
 		{
 			switchSniper = newSwitchSniperState;
+		}
+
+		public void FlashlightInput(bool newFlashightState)
+		{
+			flashlight = newFlashightState;
 		}
 
 		public void ScrollInput(float newScrollDirection)

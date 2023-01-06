@@ -8,18 +8,18 @@ public class FlickeringLight : MonoBehaviour
     [SerializeField] float amplitude = 1.0f;
     [SerializeField] float randomDeviation = 0.0f;
 
-	new Light light;
+	Light mylight;
     float originalIntensity;
 
 	void Start () 
     {   
-		light = GetComponent<Light>();
-        originalIntensity = light.intensity;
+		mylight = GetComponent<Light>();
+        originalIntensity = mylight.intensity;
 	}
 
     void Update()
     {
-        light.intensity = EvalWave();
+        mylight.intensity = EvalWave();
     }
 
 	float EvalWave () 

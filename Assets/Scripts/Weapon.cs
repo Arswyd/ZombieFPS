@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using StarterAssets;
+using TMPro;
 
 public class Weapon : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] GameObject enemyHitEffect;
     [SerializeField] Ammo ammoSlot;
     [SerializeField] AmmoType ammoType;
+    [SerializeField] TextMeshProUGUI ammoText;
 
     private StarterAssetsInputs starterAssetsInputs;
     Animator animator;
@@ -34,12 +36,14 @@ public class Weapon : MonoBehaviour
            StartCoroutine(Shoot()); 
         }
         starterAssetsInputs.fire = false;
+
+        DisplayAmmo();
     }
 
     IEnumerator Shoot()
     {
         canShoot = false;
-        if(ammoSlot.GetCurrentAmmoAmount(ammoType) > 0)
+        if (ammoSlot.GetCurrentAmmoAmount(ammoType) > 0)
         {
             animator.SetTrigger("Fire");
             PlayMuzzleFlash();
@@ -49,6 +53,11 @@ public class Weapon : MonoBehaviour
 
         yield return new WaitForSeconds(timeBetweenShots);
         canShoot = true;
+    }
+
+    void DisplayAmmo()
+    {
+        ammoText.text = ammoSlot.GetCurrentAmmoAmount(ammoType).ToString();
     }
 
     void PlayMuzzleFlash()
