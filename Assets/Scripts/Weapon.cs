@@ -9,24 +9,31 @@ using TMPro;
 public class Weapon : MonoBehaviour
 {
     [SerializeField] Camera FPCamera;
-    [SerializeField] float range = 100f;
-    [SerializeField] float damage = 50f;
+    [SerializeField] float shortrange = 50f;
+    [SerializeField] float longrange = 100f;
+    [SerializeField] float shortRangeDamage = 50f;
+    [SerializeField] float longRangeDamage = 50f;
     [SerializeField] float timeBetweenShots = 0.5f;
+    [SerializeField] float timeBeforeReload = 0.5f;
     [SerializeField] ParticleSystem muzzleFlash;
     [SerializeField] GameObject hitEffect;
     [SerializeField] GameObject enemyHitEffect;
     [SerializeField] Ammo ammoSlot;
     [SerializeField] AmmoType ammoType;
     [SerializeField] TextMeshProUGUI ammoText;
+    [SerializeField] AudioClip shotSFX;
+    [SerializeField] AudioClip reloadSFX;
 
     private StarterAssetsInputs starterAssetsInputs;
     Animator animator;
+    AudioSource audioSource;
     bool canShoot = true;
 
     void Awake() 
     {
         starterAssetsInputs = FindObjectOfType<StarterAssetsInputs>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -46,11 +53,11 @@ public class Weapon : MonoBehaviour
         if (ammoSlot.GetCurrentAmmoAmount(ammoType) > 0)
         {
             animator.SetTrigger("Fire");
+            StartCoroutine(PlayClip(shotSFX, reloadSFX));
             PlayMuzzleFlash();
             ProcessRaycast();
             ammoSlot.ReduceCurrentAmmo(ammoType);
         }
-
         yield return new WaitForSeconds(timeBetweenShots);
         canShoot = true;
     }
@@ -68,13 +75,13 @@ public class Weapon : MonoBehaviour
     void ProcessRaycast()
     {
         RaycastHit hit;
-        if (Physics.Raycast(FPCamera.transform.position, FPCamera.transform.forward, out hit, range))
+        if (Physics.Raycast(FPCamera.transform.position, FPCamera.transform.forward, out hit, longrange))
         {
             CreateHitImpact(hit);
             EnemyProcessHit target = hit.transform.GetComponent<EnemyProcessHit>();
             if (target != null)
             {
-                target.ProcessHit(damage);
+                target.ProcessHit(hit.distance >= shortrange ? longRangeDamage : shortRangeDamage);
             }
         }
         else
@@ -92,5 +99,20 @@ public class Weapon : MonoBehaviour
     public bool GetCanShoot()
     {
         return canShoot;
+    }
+
+    IEnumerator PlayClip(AudioClip shotClip, AudioClip reloadClip)
+    {
+        if(shotClip != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(shotClip);
+        }
+
+        yield return new WaitForSeconds(timeBeforeReload);
+
+        if(reloadClip != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(reloadClip);
+        }
     }
 }

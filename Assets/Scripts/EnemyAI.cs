@@ -15,6 +15,8 @@ public class EnemyAI : MonoBehaviour
 
     [SerializeField] float maxAnimationCycleOffset = 0.5f;
 
+    [SerializeField] AudioClip screamSFX;
+
 
     NavMeshAgent navMeshAgent;
     Transform target;
@@ -22,6 +24,7 @@ public class EnemyAI : MonoBehaviour
     EnemyHealth enemyHealth;
     float distanceToTarget = Mathf.Infinity;
     bool isProvoked = false;
+    AudioSource audioSource;
 
     void Awake()
     {
@@ -30,6 +33,19 @@ public class EnemyAI : MonoBehaviour
         animator.SetFloat("CycleOffset", UnityEngine.Random.Range(0, maxAnimationCycleOffset));
         enemyHealth = GetComponent<EnemyHealth>();
         target = FindObjectOfType<PlayerHealth>().transform;
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    void Start()
+    {
+        if (isWaiting)
+        {
+            audioSource.enabled = false;
+        }
+        else
+        {
+            audioSource.PlayDelayed(UnityEngine.Random.Range(0f,10f));
+        }
     }
 
     void Update()
@@ -56,6 +72,9 @@ public class EnemyAI : MonoBehaviour
         else if (distanceToTarget <= chaseRange)
         {
             isProvoked = true;
+            audioSource.enabled = true;
+            audioSource.PlayOneShot(screamSFX);
+            audioSource.Play();
         }
     }
 

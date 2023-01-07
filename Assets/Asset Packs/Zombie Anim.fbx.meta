@@ -36,6 +36,9 @@ ModelImporter:
   - first:
       74: 6379769170847555686
     second: metarig|Z_Crawling (1)
+  - first:
+      74: -3413843504869068511
+    second: metarig|Z_Attacking (1)
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -448,7 +451,14 @@ ModelImporter:
           preInfinity: 2
           postInfinity: 2
           rotationOrder: 4
-      events: []
+      events:
+      - time: 0.18075803
+        functionName: ScreamingEvent
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: a16ec250e759d324aa01bc9d9393147a, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -653,6 +663,35 @@ ModelImporter:
           preInfinity: 2
           postInfinity: 2
           rotationOrder: 4
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: metarig|Z_Agonizing
+      takeName: metarig|Z_Agonizing
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 349
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: -0.14
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
       events: []
       transformMask: []
       maskType: 3
