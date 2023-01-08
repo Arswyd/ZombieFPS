@@ -23,22 +23,24 @@ public class EnemyScream : MonoBehaviour
 
     public void ScreamingEvent()
     {
-        if (debug)
-            Debug.Log(animator.GetFloat("Blend"));
-
         if (animator.GetFloat("Blend") < 2.5f) {return;}
     
         StartCoroutine(StartScreaming());
-        //audioSource.PlayOneShot(screamSFX);
     }
 
     IEnumerator StartScreaming()
     {
-        audioSource.Pause();
-        audioSource.PlayOneShot(screamSFX);
+        originalSFX = audioSource.clip;
+        audioSource.Stop();
+        audioSource.clip = screamSFX;
+        audioSource.loop = false;
+        audioSource.Play();
 
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(2.5f);
 
-        audioSource.UnPause();
+        audioSource.Stop();
+        audioSource.clip = originalSFX;
+        audioSource.loop = true;
+        audioSource.Play();
     }
 }

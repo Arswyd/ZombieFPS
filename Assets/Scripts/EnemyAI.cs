@@ -12,9 +12,6 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] float runSpeed = 4f;
     [SerializeField] float waitLenght = 4f;
     [SerializeField] bool isWaiting = false;
-
-    [SerializeField] float maxAnimationCycleOffset = 0.5f;
-
     [SerializeField] AudioClip screamSFX;
 
 
@@ -26,11 +23,12 @@ public class EnemyAI : MonoBehaviour
     bool isProvoked = false;
     AudioSource audioSource;
 
+    AudioClip originalSFX;
+
     void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        animator.SetFloat("CycleOffset", UnityEngine.Random.Range(0, maxAnimationCycleOffset));
         enemyHealth = GetComponent<EnemyHealth>();
         target = FindObjectOfType<PlayerHealth>().transform;
         audioSource = GetComponent<AudioSource>();
@@ -44,7 +42,7 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            audioSource.PlayDelayed(UnityEngine.Random.Range(0f,10f));
+            StartCoroutine(PlayDelayedSoundAndAnimation(UnityEngine.Random.Range(0f,10f)));
         }
     }
 
@@ -72,9 +70,10 @@ public class EnemyAI : MonoBehaviour
         else if (distanceToTarget <= chaseRange)
         {
             isProvoked = true;
-            audioSource.enabled = true;
-            audioSource.PlayOneShot(screamSFX);
-            audioSource.Play();
+            if(isWaiting)
+            {
+                StartCoroutine(StartAwakeningScream());
+            }
         }
     }
 
@@ -119,6 +118,32 @@ public class EnemyAI : MonoBehaviour
     {
         yield return new WaitForSeconds(waitLenght);
         isWaiting = false;
+    }
+
+    IEnumerator PlayDelayedSoundAndAnimation(float delay) 
+    {
+        yield return new WaitForSeconds(delay);
+        if(!enemyHealth.IsDead())
+        {
+            animator.Play("Idle");
+            audioSource.Play();
+        }
+    }
+
+    IEnumerator StartAwakeningScream() 
+    {
+        originalSFX = audioSource.clip;
+        audioSource.clip = screamSFX;
+        audioSource.loop = false;
+        audioSource.enabled = true;
+        audioSource.Play();
+
+        yield return new WaitForSeconds(2.5f);
+
+        audioSource.Stop();
+        audioSource.clip = originalSFX;
+        audioSource.loop = true;
+        audioSource.Play();
     }
 
     void AttackTarget()

@@ -59,6 +59,16 @@ namespace StarterAssets
 		[SerializeField] float sprintBobSpeed = 18f;
 		[SerializeField] float sprintBobAmount = 0.1f;
 
+		[Space(10)]
+		[Header("Footstep parameters")]
+		[SerializeField] float baseStepSpeed = 0.5f;
+		[SerializeField] float sprintStepMultiplier = 0.6f;
+		[SerializeField] AudioClip[] audioClips;
+		AudioSource audioSource;
+		float footstepTimer = 0;
+		float GetCurrentStepSpeed => _input.sprint ? baseStepSpeed * sprintStepMultiplier : baseStepSpeed;
+
+
 		//GameObject playerFollowCamera;
 		float cameraDefaultYPos = 0;
     	float headBobTimer;
@@ -108,6 +118,8 @@ namespace StarterAssets
 
 			//playerFollowCamera = GameObject.FindGameObjectWithTag("PlayerCamera");
 			cameraDefaultYPos = CinemachineCameraTarget.transform.localPosition.y;
+
+			audioSource = GetComponent<AudioSource>();
 		}
 
 		private void Start()
@@ -131,6 +143,7 @@ namespace StarterAssets
 			GroundedCheck();
 			Move();
 			HandleHeadBob();
+			//HandleFootsteps();
 		}
 
 		private void LateUpdate()
@@ -288,11 +301,30 @@ namespace StarterAssets
 			if (MathF.Abs(_speed) > 0.1f)
 			{
 				headBobTimer += Time.deltaTime * (_input.sprint ? sprintBobSpeed : walkBobSpeed);
+     			if (headBobTimer > Mathf.PI * 1.5) 
+				{ 
+					audioSource.PlayOneShot(audioClips[UnityEngine.Random.Range(0, audioClips.Length - 1)]);
+        			headBobTimer = headBobTimer - (Mathf.PI * 2);
+				}
 				CinemachineCameraTarget.transform.localPosition = new Vector3(
 					CinemachineCameraTarget.transform.localPosition.x,
 					cameraDefaultYPos + MathF.Sin(headBobTimer) * (_input.sprint ? sprintBobAmount : walkBobAmount),
 					CinemachineCameraTarget.transform.localPosition.z);
 			}
     	}
+
+		void HandleFootsteps()
+		{
+			if (!Grounded) { return; }
+			if (MathF.Abs(_speed) < 0.1f) { return; }
+
+			footstepTimer -= Time.deltaTime;
+
+			if (footstepTimer <= 0)
+			{
+				audioSource.PlayOneShot(audioClips[UnityEngine.Random.Range(0, audioClips.Length - 1)]);
+				footstepTimer = GetCurrentStepSpeed;
+			}	
+		}
 	}
 }
