@@ -14,13 +14,15 @@ public class WeaponZoom : MonoBehaviour
     bool zoomedInToggle = false;
     float zoomedOutSensitivity;
 
-    private StarterAssetsInputs starterAssetsInputs;
-    private FirstPersonController firstPersonController;
+    StarterAssetsInputs starterAssetsInputs;
+    FirstPersonController firstPersonController;
+    Weapon weaponScript;
 
     void Awake() 
     {
         starterAssetsInputs = FindObjectOfType<StarterAssetsInputs>();
         firstPersonController = FindObjectOfType<FirstPersonController>();
+        weaponScript = GetComponent<Weapon>();
     }
 
     void Start() 
@@ -30,12 +32,12 @@ public class WeaponZoom : MonoBehaviour
 
     void Update() 
     {
-        if (zoomedInToggle == starterAssetsInputs.zoom)
+        if (zoomedInToggle == starterAssetsInputs.zoom && !weaponScript.GetIsReloading())
         {
             return;
         }
 
-        if (starterAssetsInputs.zoom)
+        if (starterAssetsInputs.zoom && !weaponScript.GetIsReloading())
         {
             zoomedInToggle = true;
             zoomCamera.gameObject.SetActive(true);

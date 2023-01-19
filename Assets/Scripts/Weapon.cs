@@ -23,11 +23,13 @@ public class Weapon : MonoBehaviour
     [SerializeField] TextMeshProUGUI ammoText;
     [SerializeField] AudioClip shotSFX;
     [SerializeField] AudioClip reloadSFX;
+    [SerializeField] bool zoomOutWhenReloading;
 
     private StarterAssetsInputs starterAssetsInputs;
     Animator animator;
     AudioSource audioSource;
     bool canShoot = true;
+    bool isReloading = false;
 
     void Awake() 
     {
@@ -60,6 +62,8 @@ public class Weapon : MonoBehaviour
         }
         yield return new WaitForSeconds(timeBetweenShots);
         canShoot = true;
+        if (zoomOutWhenReloading)
+            isReloading = false;
     }
 
     void DisplayAmmo()
@@ -114,5 +118,14 @@ public class Weapon : MonoBehaviour
         {
             audioSource.PlayOneShot(reloadClip);
         }
+        
+        if (zoomOutWhenReloading)
+            isReloading = true;
+    }
+
+    public bool GetIsReloading()
+    {
+        Debug.Log(isReloading);
+        return isReloading;
     }
 }
