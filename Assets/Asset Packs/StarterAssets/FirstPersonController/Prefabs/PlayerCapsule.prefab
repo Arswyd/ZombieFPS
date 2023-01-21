@@ -164,7 +164,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   CinemachineCameraTarget: {fileID: 4135013735270702863}
-  TopClamp: 89
+  TopClamp: 30
   BottomClamp: -89
   walkBobSpeed: 10
   walkBobAmount: 0.05

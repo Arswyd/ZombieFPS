@@ -125,7 +125,6 @@ public class Weapon : MonoBehaviour
 
     public bool GetIsReloading()
     {
-        Debug.Log(isReloading);
         return isReloading;
     }
 }
