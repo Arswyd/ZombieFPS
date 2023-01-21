@@ -1147,7 +1147,7 @@ MonoBehaviour:
   runSpeed: 4
   waitLenght: 4
   isWaiting: 0
-  screamSFX: {fileID: 0}
+  screamSFX: {fileID: 8300000, guid: eef97608e5a69ca489174621cb492df9, type: 3}
 --- !u!195 &5819894639200357764
 NavMeshAgent:
   m_ObjectHideFlags: 0

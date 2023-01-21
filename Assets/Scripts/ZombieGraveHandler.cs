@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class ZombieGraveHandler : MonoBehaviour
 {
-    [SerializeField] float awakeningTime = 2f;
+    [SerializeField] float awakeningTime = 0.1f;
+    [SerializeField] float gaveDestroyDelay = 0.3f;
     [SerializeField] ParticleSystem particleFX;
     EnemyAI enemyAI;
     bool hasAwakened;
@@ -27,9 +28,9 @@ public class ZombieGraveHandler : MonoBehaviour
 
     IEnumerator BeginAwakening()
     {
-        //particleFX.Play();
         yield return new WaitForSeconds(awakeningTime);
         particleFX.Play();
+        yield return new WaitForSeconds(gaveDestroyDelay);
         Destroy(gameObject);
     }
 }

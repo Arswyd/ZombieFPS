@@ -709,13 +709,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac82e21b770df4644a20f65b05ffbc94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseRange: 0.1
+  chaseRange: 10
   turnSpeed: 5
   walkSpeed: 0.5
   runSpeed: 4
   waitLenght: 4
   isWaiting: 0
-  screamSFX: {fileID: 0}
+  screamSFX: {fileID: 8300000, guid: eef97608e5a69ca489174621cb492df9, type: 3}
 --- !u!195 &2387849996417620172
 NavMeshAgent:
   m_ObjectHideFlags: 0

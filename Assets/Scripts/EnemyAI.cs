@@ -70,16 +70,15 @@ public class EnemyAI : MonoBehaviour
         else if (distanceToTarget <= chaseRange)
         {
             isProvoked = true;
-            if(isWaiting)
-            {
-                StartCoroutine(StartAwakeningScream());
-            }
+            StartCoroutine(StartAwakeningScream());
         }
     }
 
     public void OnDamageTaken()
     {
+        if (isProvoked) { return; }
         isProvoked = true;
+        StartCoroutine(StartAwakeningScream());
     }
 
     void EngageTarget()
@@ -132,18 +131,23 @@ public class EnemyAI : MonoBehaviour
 
     IEnumerator StartAwakeningScream() 
     {
+        if(isWaiting)
+          yield return new WaitForSeconds(0.5f);
+
         originalSFX = audioSource.clip;
         audioSource.clip = screamSFX;
         audioSource.loop = false;
         audioSource.enabled = true;
-        audioSource.Play();
+        if(!enemyHealth.IsDead())
+            audioSource.Play();
 
         yield return new WaitForSeconds(2.5f);
 
         audioSource.Stop();
         audioSource.clip = originalSFX;
         audioSource.loop = true;
-        audioSource.Play();
+        if(!enemyHealth.IsDead())
+            audioSource.Play();
     }
 
     void AttackTarget()
