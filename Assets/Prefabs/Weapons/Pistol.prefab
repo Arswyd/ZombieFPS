@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 611712958}
   - component: {fileID: 1598173948}
   - component: {fileID: 1696267295}
+  - component: {fileID: 139129366216609660}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
@@ -49,13 +50,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FPCamera: {fileID: 0}
-  range: 100
-  damage: 50
-  timeBetweenShots: 0.5
+  shortrange: 10
+  longrange: 20
+  shortRangeDamage: 20
+  longRangeDamage: 20
+  timeBetweenShots: 0.3
+  timeBeforeReload: 0
   muzzleFlash: {fileID: 1058296709638056923}
   hitEffect: {fileID: 4064143696271111222, guid: 16915b1530929044eb8f41b46128dd58, type: 3}
+  enemyHitEffect: {fileID: 4064143696271111222, guid: 9ca9c3e42a8ea0046ac4e646de9fc0a2, type: 3}
   ammoSlot: {fileID: 0}
   ammoType: 0
+  ammoText: {fileID: 0}
+  shotSFX: {fileID: 8300000, guid: b398159bf1f6dbe448ad6ad1778f6232, type: 3}
+  reloadSFX: {fileID: 0}
+  zoomOutWhenReloading: 0
 --- !u!114 &1598173948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,6 +99,102 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!82 &139129366216609660
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933635415027577364}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &139129366466783521
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -156,6 +261,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9a37e333cfa11024a92befa59803f756, type: 3}
       propertyPath: m_Name
       value: Pistol
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726321793924762697, guid: 9a37e333cfa11024a92befa59803f756, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a37e333cfa11024a92befa59803f756, type: 3}

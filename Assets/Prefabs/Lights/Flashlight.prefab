@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3423145677576456815}
   - component: {fileID: 2633425029105735120}
+  - component: {fileID: 1916595676}
   m_Layer: 0
   m_Name: Flashlight
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &2633425029105735120
 Light:
   m_ObjectHideFlags: 0
@@ -39,12 +40,12 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6107948909073087135}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0.66644806, b: 0, a: 1}
-  m_Intensity: 10
+  m_Intensity: 8
   m_Range: 20
   m_SpotAngle: 70
   m_InnerSpotAngle: 7
@@ -94,3 +95,18 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1916595676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6107948909073087135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c84404f26286ea45802ba7b2670df5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  batteryCapacity: 10
+  flickerDeviation: 1
+  flickerLenght: 0.25

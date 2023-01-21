@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9087003534226958161}
   - component: {fileID: 9087003534077389331}
   - component: {fileID: 7798378991362490083}
+  - component: {fileID: 7798378991362490081}
   m_Layer: 0
   m_Name: Sniper
   m_TagString: Untagged
@@ -49,13 +50,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FPCamera: {fileID: 0}
-  range: 100
-  damage: 50
+  shortrange: 50
+  longrange: 500
+  shortRangeDamage: 50
+  longRangeDamage: 50
   timeBetweenShots: 2
+  timeBeforeReload: 0.7
   muzzleFlash: {fileID: 8121211487777993524}
   hitEffect: {fileID: 4064143696271111222, guid: 16915b1530929044eb8f41b46128dd58, type: 3}
+  enemyHitEffect: {fileID: 4064143696271111222, guid: 9ca9c3e42a8ea0046ac4e646de9fc0a2, type: 3}
   ammoSlot: {fileID: 0}
   ammoType: 2
+  ammoText: {fileID: 0}
+  shotSFX: {fileID: 8300000, guid: 6a24fc83b923ca847b4cc0596642abc1, type: 3}
+  reloadSFX: {fileID: 8300000, guid: 51929248c843ba64ca54cf74a0622f68, type: 3}
+  zoomOutWhenReloading: 1
 --- !u!114 &9087003534077389331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,6 +99,102 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!82 &7798378991362490081
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8281967876774406907}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.6
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &3840547330305693101
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -151,6 +256,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b9a6ac0c196179c48a1366559861e99f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4117524301153642655, guid: b9a6ac0c196179c48a1366559861e99f, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b9a6ac0c196179c48a1366559861e99f, type: 3}
