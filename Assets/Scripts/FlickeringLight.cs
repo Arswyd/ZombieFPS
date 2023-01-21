@@ -8,6 +8,8 @@ public class FlickeringLight : MonoBehaviour
     [SerializeField] float amplitude = 1.0f;
     [SerializeField] float randomDeviation = 0.0f;
 
+    [SerializeField] float randomDelay = 0.0f;
+
 	Light mylight;
     float originalIntensity;
 
@@ -15,6 +17,7 @@ public class FlickeringLight : MonoBehaviour
     {   
 		mylight = GetComponent<Light>();
         originalIntensity = mylight.intensity;
+        randomDelay = Random.Range(-randomDelay, randomDelay);
 	}
 
     void Update()
@@ -29,7 +32,7 @@ public class FlickeringLight : MonoBehaviour
         float cycles = Time.time / period;
 
         const float tau = Mathf.PI * 2;
-        float rawSinWave = Mathf.Sin(cycles * tau);
+        float rawSinWave = Mathf.Sin(cycles * tau + randomDelay);
         
 		return (rawSinWave * amplitude) + Random.Range(-randomDeviation, randomDeviation)  + originalIntensity;    
 	}

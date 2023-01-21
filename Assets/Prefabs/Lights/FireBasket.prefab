@@ -149,9 +149,9 @@ ParticleSystem:
     enabled: 1
     startLifetime:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 2
-      minScalar: 5
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4974,6 +4974,7 @@ MonoBehaviour:
   period: 2
   amplitude: 0.3
   randomDeviation: 0.07
+  randomDelay: 1
 --- !u!1001 &8136490996010058569
 PrefabInstance:
   m_ObjectHideFlags: 0

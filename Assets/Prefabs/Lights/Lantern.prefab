@@ -4956,6 +4956,7 @@ MonoBehaviour:
   period: 2
   amplitude: 0.3
   randomDeviation: 0.07
+  randomDelay: 1
 --- !u!1001 &3244028686703728412
 PrefabInstance:
   m_ObjectHideFlags: 0
