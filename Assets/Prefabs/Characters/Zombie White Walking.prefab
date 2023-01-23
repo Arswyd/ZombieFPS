@@ -919,6 +919,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseRange: 10
+  alertedChaseRange: 30
+  alertDecreaseSpeed: 0.2
   turnSpeed: 5
   walkSpeed: 2
   runSpeed: 4

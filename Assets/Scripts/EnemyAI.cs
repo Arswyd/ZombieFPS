@@ -6,7 +6,9 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    [SerializeField] float chaseRange = 5f;
+    [SerializeField] float chaseRange = 10f;
+    [SerializeField] float alertedChaseRange = 20f;
+    [SerializeField] float alertDecreaseSpeed = 2f;
     [SerializeField] float turnSpeed = 5f;
     [SerializeField] float walkSpeed = 2f;
     [SerializeField] float runSpeed = 4f;
@@ -21,9 +23,11 @@ public class EnemyAI : MonoBehaviour
     EnemyHealth enemyHealth;
     float distanceToTarget = Mathf.Infinity;
     bool isProvoked = false;
+    bool isAlerted = false;
     AudioSource audioSource;
-
     AudioClip originalSFX;
+    EnemyGroupAlerter enemyGroupAlerter;
+    float originalChaseRange;
 
     void Awake()
     {
@@ -32,6 +36,8 @@ public class EnemyAI : MonoBehaviour
         enemyHealth = GetComponent<EnemyHealth>();
         target = FindObjectOfType<PlayerHealth>().transform;
         audioSource = GetComponent<AudioSource>();
+        enemyGroupAlerter = GetComponentInParent<EnemyGroupAlerter>();
+        originalChaseRange = chaseRange;
     }
 
     void Start()
@@ -69,16 +75,43 @@ public class EnemyAI : MonoBehaviour
         }
         else if (distanceToTarget <= chaseRange)
         {
-            isProvoked = true;
-            StartCoroutine(StartAwakeningScream());
+            GetProvoked(false);
+        }
+        if(isAlerted)
+        {
+            if(chaseRange >= originalChaseRange)
+            {
+                chaseRange = chaseRange - Time.deltaTime * alertDecreaseSpeed;
+            }
+            else
+            {
+                isAlerted = false;
+                chaseRange = originalChaseRange;
+            }
         }
     }
 
-    public void OnDamageTaken()
+    public void OnDamageTaken(bool isDead)
     {
         if (isProvoked) { return; }
+            GetProvoked(isDead);
+    }
+
+    void GetProvoked(bool isDead)
+    {     
         isProvoked = true;
-        StartCoroutine(StartAwakeningScream());
+        if(!isAlerted)
+        {
+            enemyGroupAlerter.AlertEnemyGroup();
+            if(!isDead)
+                StartCoroutine(StartAwakeningScream());
+        }
+    }
+
+    void GetAlerted()
+    {
+        isAlerted = true;
+        chaseRange = alertedChaseRange;
     }
 
     void EngageTarget()
@@ -96,7 +129,6 @@ public class EnemyAI : MonoBehaviour
         else
         {
             animator.SetBool("attack", true);
-            AttackTarget();
         }
     }
 
@@ -132,7 +164,7 @@ public class EnemyAI : MonoBehaviour
     IEnumerator StartAwakeningScream() 
     {
         if(isWaiting)
-          yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.5f);
 
         originalSFX = audioSource.clip;
         audioSource.clip = screamSFX;
@@ -148,11 +180,6 @@ public class EnemyAI : MonoBehaviour
         audioSource.loop = true;
         if(!enemyHealth.IsDead())
             audioSource.Play();
-    }
-
-    void AttackTarget()
-    {
-        //---
     }
 
     void FaceTarget()
