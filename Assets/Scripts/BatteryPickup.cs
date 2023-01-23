@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BatteryPickup : MonoBehaviour
 {
+    [SerializeField]  AudioClip clip;
     FlashlightSystem flashlightSystem;
 
     void Awake() 
@@ -16,6 +17,7 @@ public class BatteryPickup : MonoBehaviour
         if(other.tag == "Player")
         {
             flashlightSystem.RestoreBatteryCapacity();
+            AudioSource.PlayClipAtPoint(clip, transform.position, 0.5f);
             Destroy(gameObject);
         }
     }

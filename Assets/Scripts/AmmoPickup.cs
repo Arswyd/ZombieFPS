@@ -6,7 +6,7 @@ public class AmmoPickup : MonoBehaviour
 {
     [SerializeField] int ammoAmount = 5;
     [SerializeField] AmmoType ammoType;
-
+    [SerializeField]  AudioClip clip;
     Ammo ammo;
 
     void Awake() 
@@ -19,6 +19,7 @@ public class AmmoPickup : MonoBehaviour
         if(other.tag == "Player")
         {
             ammo.IncreaseCurrentAmmo(ammoType, ammoAmount);
+            AudioSource.PlayClipAtPoint(clip, transform.position, 0.5f);
             Destroy(gameObject);
         }
     }

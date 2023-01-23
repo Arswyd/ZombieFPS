@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] float hitPoints = 100f;
+    [SerializeField] AudioClip deathSFX;
     AudioSource audioSource;
 
     bool isDead = false;
@@ -34,7 +35,8 @@ public class EnemyHealth : MonoBehaviour
     {
         if (isDead) return;
         isDead = true;
-        audioSource.enabled = false;
+        audioSource.Stop(); //enabled = false;
+        audioSource.PlayOneShot(deathSFX, 2f);
         GetComponent<Animator>().SetTrigger("die");
     }
 }

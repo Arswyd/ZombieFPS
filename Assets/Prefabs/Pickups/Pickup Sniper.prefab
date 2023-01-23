@@ -5387,6 +5387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammoAmount: 5
   ammoType: 2
+  clip: {fileID: 8300000, guid: 965b83f9763572c4cb31265479b62d18, type: 3}
 --- !u!135 &4693687388801869304
 SphereCollider:
   m_ObjectHideFlags: 0

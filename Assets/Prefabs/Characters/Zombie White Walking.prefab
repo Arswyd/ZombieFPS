@@ -906,6 +906,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPoints: 100
+  deathSFX: {fileID: 8300000, guid: c3ff4209c574f404ab20ff739b08ee71, type: 3}
 --- !u!114 &4940192736684314167
 MonoBehaviour:
   m_ObjectHideFlags: 0

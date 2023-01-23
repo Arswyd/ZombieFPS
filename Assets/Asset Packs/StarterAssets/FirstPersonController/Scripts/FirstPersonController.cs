@@ -322,7 +322,7 @@ namespace StarterAssets
 
 			if (footstepTimer <= 0)
 			{
-				audioSource.PlayOneShot(audioClips[UnityEngine.Random.Range(0, audioClips.Length - 1)]);
+				audioSource.PlayOneShot(audioClips[UnityEngine.Random.Range(0, audioClips.Length - 1)], 0.05f);
 				footstepTimer = GetCurrentStepSpeed;
 			}	
 		}
