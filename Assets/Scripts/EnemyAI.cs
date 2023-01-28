@@ -48,7 +48,8 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            StartCoroutine(PlayDelayedSoundAndAnimation(UnityEngine.Random.Range(0f,10f)));
+            audioSource.time = UnityEngine.Random.Range(0f,30f);
+            StartCoroutine(PlayDelayedAnimation(UnityEngine.Random.Range(0f,2f)));
         }
     }
 
@@ -151,13 +152,12 @@ public class EnemyAI : MonoBehaviour
         isWaiting = false;
     }
 
-    IEnumerator PlayDelayedSoundAndAnimation(float delay) 
+    IEnumerator PlayDelayedAnimation(float delay) 
     {
         yield return new WaitForSeconds(delay);
         if(!enemyHealth.IsDead())
         {
             animator.Play("Idle");
-            audioSource.Play();
         }
     }
 
@@ -167,6 +167,8 @@ public class EnemyAI : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
 
         originalSFX = audioSource.clip;
+        audioSource.Stop();
+        audioSource.time = 0f;
         audioSource.clip = screamSFX;
         audioSource.loop = false;
         audioSource.enabled = true;

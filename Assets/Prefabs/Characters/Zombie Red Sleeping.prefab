@@ -388,7 +388,7 @@ Transform:
   m_GameObject: {fileID: 2093459032738752942}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 37.48, y: 0.04, z: 1.7170181}
-  m_LocalScale: {x: 0.25, y: 0.2, z: 0.25}
+  m_LocalScale: {x: 0.28, y: 0.225, z: 0.28}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6985994287989657347}
@@ -445,6 +445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPoints: 100
+  deathSFX: {fileID: 8300000, guid: c3ff4209c574f404ab20ff739b08ee71, type: 3}
 --- !u!114 &1282431020000967820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -458,6 +459,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseRange: 10
+  alertedChaseRange: 20
+  alertDecreaseSpeed: 2
   turnSpeed: 5
   walkSpeed: 2
   runSpeed: 4
@@ -521,7 +524,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 491cadc2b5e7d9f4585f378a57213705, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 1

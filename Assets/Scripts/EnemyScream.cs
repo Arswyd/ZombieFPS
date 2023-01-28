@@ -32,6 +32,7 @@ public class EnemyScream : MonoBehaviour
     {
         originalSFX = audioSource.clip;
         audioSource.Stop();
+        audioSource.time = 0f;
         audioSource.clip = screamSFX;
         audioSource.loop = false;
         audioSource.Play();
