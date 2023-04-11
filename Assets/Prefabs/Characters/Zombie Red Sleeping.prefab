@@ -2031,6 +2031,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: grave VFX
       objectReference: {fileID: 0}
+    - target: {fileID: 6735780690490941037, guid: 61ab166fd1cf51743ade303033d3b11b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d556dae7888bc434cb4d29a326188281, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61ab166fd1cf51743ade303033d3b11b, type: 3}
 --- !u!4 &1086789112152136543 stripped
