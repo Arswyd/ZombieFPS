@@ -101,6 +101,8 @@ public class EnemyAI : MonoBehaviour
     void GetProvoked(bool isDead)
     {     
         isProvoked = true;
+        if(!audioSource.enabled)
+            audioSource.enabled = true;
         if(!isAlerted)
         {
             enemyGroupAlerter.AlertEnemyGroup();
@@ -171,7 +173,6 @@ public class EnemyAI : MonoBehaviour
         audioSource.time = 0f;
         audioSource.clip = screamSFX;
         audioSource.loop = false;
-        audioSource.enabled = true;
         if(!enemyHealth.IsDead())
             audioSource.Play();
 
