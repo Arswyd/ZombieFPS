@@ -43,7 +43,6 @@ public class FlashlightSystem : MonoBehaviour
     {
         if (isTurnedOn && currentBatteryCapacity >= 0)
         {
-            Debug.Log(currentBatteryCapacity);
             currentBatteryCapacity -= Time.deltaTime;
         }
         if (isTurnedOn && currentBatteryCapacity < 0)

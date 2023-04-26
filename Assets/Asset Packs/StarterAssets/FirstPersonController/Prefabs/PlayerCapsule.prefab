@@ -153,7 +153,7 @@ MonoBehaviour:
   SprintSpeed: 6
   RotationSpeed: 1
   SpeedChangeRate: 10
-  JumpHeight: 1.2
+  JumpHeight: 0.5
   Gravity: -15
   JumpTimeout: 0.1
   FallTimeout: 0.15
@@ -164,7 +164,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   CinemachineCameraTarget: {fileID: 4135013735270702863}
-  TopClamp: 30
+  TopClamp: 45
   BottomClamp: -89
   walkBobSpeed: 10
   walkBobAmount: 0.05
@@ -346,6 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverCanvas: {fileID: 0}
+  gameOverText: {fileID: 0}
 --- !u!114 &844259462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,11 +361,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammoSlots:
   - ammoType: 0
-    ammoAmount: 999
+    ammoAmount: 0
   - ammoType: 1
-    ammoAmount: 999
+    ammoAmount: 0
   - ammoType: 2
-    ammoAmount: 999
+    ammoAmount: 0
 --- !u!82 &844259470
 AudioSource:
   m_ObjectHideFlags: 0
@@ -377,7 +378,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -10,8 +10,6 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] float alertedChaseRange = 20f;
     [SerializeField] float alertDecreaseSpeed = 2f;
     [SerializeField] float turnSpeed = 5f;
-    [SerializeField] float walkSpeed = 2f;
-    [SerializeField] float runSpeed = 4f;
     [SerializeField] float waitLenght = 4f;
     [SerializeField] bool isWaiting = false;
     [SerializeField] AudioClip screamSFX;
@@ -61,14 +59,6 @@ public class EnemyAI : MonoBehaviour
             navMeshAgent.enabled = false;
             return;
         }
-        if(animator.GetBool("isWalking"))
-        {
-            navMeshAgent.speed = walkSpeed;
-        }
-        else
-        {
-            navMeshAgent.speed = runSpeed;
-        }
         distanceToTarget = Vector3.Distance(target.position, transform.position);
         if (isProvoked)
         { 
@@ -102,7 +92,10 @@ public class EnemyAI : MonoBehaviour
     {     
         isProvoked = true;
         if(!audioSource.enabled)
+        {
             audioSource.enabled = true;
+            audioSource.time = UnityEngine.Random.Range(0f,30f);
+        }
         if(!isAlerted)
         {
             enemyGroupAlerter.AlertEnemyGroup();

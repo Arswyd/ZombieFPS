@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7573073131326013665
 Transform:
@@ -100,6 +100,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: coffinOld
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3a8b81661d8bb704c8657fcbd5c91a0f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a8b81661d8bb704c8657fcbd5c91a0f, type: 3}
 --- !u!4 &3157449887655201660 stripped
@@ -174,8 +178,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: gravestoneDebris
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9d2105dbde8ec2745a1fe6d540c79fc4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d2105dbde8ec2745a1fe6d540c79fc4, type: 3}
+--- !u!1 &3724458748671791507 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9d2105dbde8ec2745a1fe6d540c79fc4, type: 3}
+  m_PrefabInstance: {fileID: 4570738755104713922}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1055468072299627886
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3724458748671791507}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.49676797, y: 0.259239, z: 0.675137}
+  m_Center: {x: -0.05338399, y: 0.12139749, z: -0.2628185}
 --- !u!4 &4099471737049959209 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9d2105dbde8ec2745a1fe6d540c79fc4, type: 3}

@@ -100,8 +100,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: gravestoneDebris (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9d2105dbde8ec2745a1fe6d540c79fc4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d2105dbde8ec2745a1fe6d540c79fc4, type: 3}
+--- !u!1 &134647556759747182 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9d2105dbde8ec2745a1fe6d540c79fc4, type: 3}
+  m_PrefabInstance: {fileID: 945532637848848191}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &6122366112597134513
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134647556759747182}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.49676797, y: 0.259239, z: 0.675137}
+  m_Center: {x: -0.05338399, y: 0.12139749, z: -0.2628185}
 --- !u!4 &762671369379487956 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9d2105dbde8ec2745a1fe6d540c79fc4, type: 3}
@@ -117,6 +139,14 @@ PrefabInstance:
     - target: {fileID: 1486590601389399931, guid: ca833ac4fb9e11e46b2972a5fc05d98c, type: 3}
       propertyPath: m_Name
       value: Zombie Red Sleeping (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1756412201005959769, guid: ca833ac4fb9e11e46b2972a5fc05d98c, type: 3}
+      propertyPath: chaseRange
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1756412201005959774, guid: ca833ac4fb9e11e46b2972a5fc05d98c, type: 3}
+      propertyPath: m_Speed
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2299860472101307841, guid: ca833ac4fb9e11e46b2972a5fc05d98c, type: 3}
       propertyPath: m_RootOrder

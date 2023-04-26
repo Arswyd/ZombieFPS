@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &8136490996511061088
 Transform:
@@ -50,7 +50,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &8136490996837171071
 Transform:
@@ -4880,7 +4880,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &8136490997032221786
 Transform:
@@ -5041,6 +5041,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d88a57ef54e3f9f4a89f2f9431f34c1d, type: 3}
       propertyPath: m_Name
       value: fireBasket
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d88a57ef54e3f9f4a89f2f9431f34c1d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d88a57ef54e3f9f4a89f2f9431f34c1d, type: 3}

@@ -11,12 +11,14 @@ public class EnemyAttack : MonoBehaviour
     PlayerHealth target;
     float distanceToTarget = Mathf.Infinity;
     NavMeshAgent navMeshAgent;
+    EnemyHealth enemyHealth;
     
 
     void Awake()
     {
         target = FindObjectOfType<PlayerHealth>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+        enemyHealth = GetComponent<EnemyHealth>();
     }
 
     void Update() 
@@ -26,7 +28,7 @@ public class EnemyAttack : MonoBehaviour
 
     public void AttackHitEvent()
     {
-        if(target != null && distanceToTarget <= navMeshAgent.stoppingDistance + attackOffset)
+        if(target != null && !enemyHealth.IsDead() && distanceToTarget <= navMeshAgent.stoppingDistance + attackOffset)
         {
             target.TakeDamage(damage);
             Debug.Log("Hit");

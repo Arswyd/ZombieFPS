@@ -37,7 +37,6 @@ public class EnemyHealth : MonoBehaviour
         isDead = true;
         audioSource.Stop(); //enabled = false;
         audioSource.PlayOneShot(deathSFX, 2f);
-        Debug.Log("asd");
         GetComponent<Animator>().SetTrigger("die");
     }
 }

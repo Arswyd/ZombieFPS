@@ -25,7 +25,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] AudioClip reloadSFX;
     [SerializeField] bool zoomOutWhenReloading;
 
-    private StarterAssetsInputs starterAssetsInputs;
+    StarterAssetsInputs starterAssetsInputs;
+    DeathHandler deathHandler;
     Animator animator;
     AudioSource audioSource;
     bool canShoot = true;
@@ -34,13 +35,14 @@ public class Weapon : MonoBehaviour
     void Awake() 
     {
         starterAssetsInputs = FindObjectOfType<StarterAssetsInputs>();
+        deathHandler = FindObjectOfType<DeathHandler>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
     {
-        if(starterAssetsInputs.fire && canShoot)
+        if(starterAssetsInputs.fire && canShoot && !deathHandler.GetIsStopped())
         {
            StartCoroutine(Shoot()); 
         }
@@ -59,8 +61,8 @@ public class Weapon : MonoBehaviour
             PlayMuzzleFlash();
             ProcessRaycast();
             ammoSlot.ReduceCurrentAmmo(ammoType);
+            yield return new WaitForSeconds(timeBetweenShots);
         }
-        yield return new WaitForSeconds(timeBetweenShots);
         canShoot = true;
         if (zoomOutWhenReloading)
             isReloading = false;

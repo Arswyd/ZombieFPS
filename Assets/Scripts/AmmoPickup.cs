@@ -19,7 +19,7 @@ public class AmmoPickup : MonoBehaviour
         if(other.tag == "Player")
         {
             ammo.IncreaseCurrentAmmo(ammoType, ammoAmount);
-            AudioSource.PlayClipAtPoint(clip, transform.position, 0.5f);
+            AudioSource.PlayClipAtPoint(clip, transform.position, 0.2f);
             Destroy(gameObject);
         }
     }

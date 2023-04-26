@@ -15,7 +15,6 @@ public class EnemyProcessHit : MonoBehaviour
 
     public void ProcessHit(float damage)
     {
-        Debug.Log(damageMultiplier.ToString());
         enemyHealth.TakeDamage(damage * damageMultiplier);
     }
 }
