@@ -31,7 +31,6 @@ public class EnemyAttack : MonoBehaviour
         if(target != null && !enemyHealth.IsDead() && distanceToTarget <= navMeshAgent.stoppingDistance + attackOffset)
         {
             target.TakeDamage(damage);
-            Debug.Log("Hit");
         }
     }
 }
